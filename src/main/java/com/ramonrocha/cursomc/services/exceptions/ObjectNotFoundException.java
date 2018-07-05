@@ -1,4 +1,4 @@
-package com.ramonrocha.cursomc.exception;
+package com.ramonrocha.cursomc.services.exceptions;
 
 public class ObjectNotFoundException extends RuntimeException {
 

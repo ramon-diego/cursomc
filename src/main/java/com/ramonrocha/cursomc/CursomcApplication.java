@@ -32,114 +32,123 @@ import com.ramonrocha.cursomc.repositories.PedidoRepository;
 import com.ramonrocha.cursomc.repositories.ProdutoRepository;
 
 @SpringBootApplication
-public class CursomcApplication implements CommandLineRunner{
+public class CursomcApplication implements CommandLineRunner {
 
 	@Autowired
 	CategoriaRepository categoriaRepository;
-		
+
 	@Autowired
 	ProdutoRepository produtoRepository;
-	
+
 	@Autowired
 	EstadoRepository estadoRepository;
-	
+
 	@Autowired
 	CidadeRepository cidadeRepository;
-	
+
 	@Autowired
 	ClienteRepository clienteRepository;
-	
+
 	@Autowired
 	EnderecoRepository enderecoRepository;
-	
+
 	@Autowired
 	PedidoRepository pedidoRepository;
-	
+
 	@Autowired
 	PagamentoRepository pagamentoRepository;
-	
-	
+
 	@Autowired
 	ItemPedidoRepository itemPedidoRepository;
-	
+
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
 	}
 
 	@Override
 	public void run(String... args) throws Exception {
-		
+
 		Categoria categoria1 = new Categoria(null, "Informática");
 		Categoria categoria2 = new Categoria(null, "Escritório");
-		
+		Categoria categoria3 = new Categoria(null, "Móveis");
+		Categoria categoria4 = new Categoria(null, "Eletrodomésticos");
+		Categoria categoria5 = new Categoria(null, "Cama mesa e banho");
+		Categoria categoria6 = new Categoria(null, "Jardinagem");
+		Categoria categoria7 = new Categoria(null, "Lazer");
+		Categoria categoria8 = new Categoria(null, "Esportes");
+
 		Produto produto1 = new Produto(null, "Computador", 2000.00);
 		Produto produto2 = new Produto(null, "Impressora", 800.00);
 		Produto produto3 = new Produto(null, "Mouse", 80.00);
-		
-		categoria1.getProdutos().addAll(Arrays.asList(produto1,produto2,produto3));
+
+		categoria1.getProdutos().addAll(Arrays.asList(produto1, produto2, produto3));
 		categoria1.getProdutos().addAll(Arrays.asList(produto2));
-		
+
 		produto1.getCategorias().addAll(Arrays.asList(categoria1));
 		produto2.getCategorias().addAll(Arrays.asList(categoria1, categoria2));
 		produto3.getCategorias().addAll(Arrays.asList(categoria1));
-		
+
 		Estado estado1 = new Estado(null, "Minas Gerais");
 		Estado estado2 = new Estado(null, "São Paulo");
-		
+
 		Cidade cidade1 = new Cidade(null, "Uberlândia", estado1);
 		Cidade cidade2 = new Cidade(null, "São Paulo", estado2);
 		Cidade cidade3 = new Cidade(null, "Campinas", estado2);
-		
+
 		estado1.getCidades().addAll(Arrays.asList(cidade1));
 		estado2.getCidades().addAll(Arrays.asList(cidade2, cidade3));
-		
-		categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2));
-		
-		produtoRepository.saveAll(Arrays.asList(produto1,produto2, produto3));
-		
+
+		categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2, categoria3, categoria4, categoria5,
+				categoria6, categoria7, categoria8));
+
+		produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3));
+
 		estadoRepository.saveAll(Arrays.asList(estado1, estado2));
-		cidadeRepository.saveAll(Arrays.asList(cidade1,cidade2,cidade3));
-		
+		cidadeRepository.saveAll(Arrays.asList(cidade1, cidade2, cidade3));
+
 		Cliente cliente1 = new Cliente(null, "Maria Silva", "maria@gmail.com", "36378912377", TipoCliente.PESSOAFISICA);
-		
-		cliente1.getTelefones().addAll(Arrays.asList("4432225555","44998668402"));
-		
-		Endereco endereco1 = new Endereco(null, "Rua Flores","300", "APTO 303", "Jardim", "38222222",cliente1, cidade1);
-		Endereco endereco2 = new Endereco(null, "Rua Quintino Bocaiuva", "444", "APTO 25", "Felicidade", "87090138", cliente1, cidade2);
-		
+
+		cliente1.getTelefones().addAll(Arrays.asList("4432225555", "44998668402"));
+
+		Endereco endereco1 = new Endereco(null, "Rua Flores", "300", "APTO 303", "Jardim", "38222222", cliente1,
+				cidade1);
+		Endereco endereco2 = new Endereco(null, "Rua Quintino Bocaiuva", "444", "APTO 25", "Felicidade", "87090138",
+				cliente1, cidade2);
+
 		cliente1.getEnderecos().addAll(Arrays.asList(endereco1, endereco2));
-		
+
 		clienteRepository.saveAll(Arrays.asList(cliente1));
 		enderecoRepository.saveAll(Arrays.asList(endereco1, endereco2));
-		
+
 		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-		
-		Pedido pedido1 = new Pedido(null, sdf.parse("30/09/2017 10:32"),cliente1, endereco1);
-		Pedido pedido2 = new Pedido(null, sdf.parse("10/10/2017 19:35"),cliente1, endereco2);
-	
+
+		Pedido pedido1 = new Pedido(null, sdf.parse("30/09/2017 10:32"), cliente1, endereco1);
+		Pedido pedido2 = new Pedido(null, sdf.parse("10/10/2017 19:35"), cliente1, endereco2);
+
 		Pagamento pagamento1 = new PagamentoComCartao(null, EstadoPagamento.QUITADO, pedido1, 6);
 		pedido1.setPagamento(pagamento1);
-		
-		Pagamento pagamento2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, pedido2, sdf.parse("20/10/2017 00:00"), null);
+
+		Pagamento pagamento2 = new PagamentoComBoleto(null, EstadoPagamento.PENDENTE, pedido2,
+				sdf.parse("20/10/2017 00:00"), null);
 		pedido2.setPagamento(pagamento2);
-		
-		cliente1.getPedidos().addAll(Arrays.asList(pedido1,pedido2));
-		
-		pedidoRepository.saveAll(Arrays.asList(pedido1,pedido2));
+
+		cliente1.getPedidos().addAll(Arrays.asList(pedido1, pedido2));
+
+		pedidoRepository.saveAll(Arrays.asList(pedido1, pedido2));
 		pagamentoRepository.saveAll(Arrays.asList(pagamento1, pagamento2));
-		
+
 		ItemPedido itemPedido1 = new ItemPedido(pedido1, produto1, 0.00, 1, 2000.00);
 		ItemPedido itemPedido2 = new ItemPedido(pedido1, produto3, 0.00, 2, 80.00);
 		ItemPedido itemPedido3 = new ItemPedido(pedido2, produto2, 100.00, 1, 800.00);
-		
+
 		pedido1.getItens().addAll(Arrays.asList(itemPedido1, itemPedido2));
 		pedido2.getItens().addAll(Arrays.asList(itemPedido3));
-		
+
 		produto1.getItens().addAll(Arrays.asList(itemPedido1));
 		produto2.getItens().addAll(Arrays.asList(itemPedido3));
 		produto3.getItens().addAll(Arrays.asList(itemPedido2));
-		
+
 		itemPedidoRepository.saveAll(Arrays.asList(itemPedido1, itemPedido2, itemPedido3));
-		
+
 	}
 }

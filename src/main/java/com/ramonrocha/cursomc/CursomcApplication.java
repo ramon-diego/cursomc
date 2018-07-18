@@ -80,13 +80,36 @@ public class CursomcApplication implements CommandLineRunner {
 		Produto produto1 = new Produto(null, "Computador", 2000.00);
 		Produto produto2 = new Produto(null, "Impressora", 800.00);
 		Produto produto3 = new Produto(null, "Mouse", 80.00);
+		Produto produto4 = new Produto(null, "Mesa de Escriório", 300.00);
+		Produto produto5 = new Produto(null, "Toalha", 80.00);
+		Produto produto6 = new Produto(null, "Colchão de Ar", 200.00);
+		Produto produto7 = new Produto(null, "Guarda Roupas", 1350.00);
+		Produto produto8 = new Produto(null, "Armário Cozinha", 1650.00);
+		Produto produto9 = new Produto(null, "Barraca 4 pessoas", 140.00);
+		Produto produto10 = new Produto(null, "Capacete", 250.00);
+		Produto produto11 = new Produto(null, "Óculos", 250.00);
+		Produto produto12 = new Produto(null, "Kit Jardinagem 10 Peças", 250.00);
 
 		categoria1.getProdutos().addAll(Arrays.asList(produto1, produto2, produto3));
-		categoria1.getProdutos().addAll(Arrays.asList(produto2));
+		categoria2.getProdutos().addAll(Arrays.asList(produto4));
+		categoria3.getProdutos().addAll(Arrays.asList(produto7, produto8));
+		categoria5.getProdutos().addAll(Arrays.asList(produto5));
+		categoria6.getProdutos().addAll(Arrays.asList(produto12));
+		categoria7.getProdutos().addAll(Arrays.asList(produto6, produto9));
+		categoria8.getProdutos().addAll(Arrays.asList(produto10, produto11));
 
 		produto1.getCategorias().addAll(Arrays.asList(categoria1));
-		produto2.getCategorias().addAll(Arrays.asList(categoria1, categoria2));
+		produto2.getCategorias().addAll(Arrays.asList(categoria1));
 		produto3.getCategorias().addAll(Arrays.asList(categoria1));
+		produto4.getCategorias().addAll(Arrays.asList(categoria2));
+		produto5.getCategorias().addAll(Arrays.asList(categoria5));
+		produto6.getCategorias().addAll(Arrays.asList(categoria7));
+		produto7.getCategorias().addAll(Arrays.asList(categoria3));
+		produto8.getCategorias().addAll(Arrays.asList(categoria3));
+		produto9.getCategorias().addAll(Arrays.asList(categoria7));
+		produto10.getCategorias().addAll(Arrays.asList(categoria8));
+		produto11.getCategorias().addAll(Arrays.asList(categoria8));
+		produto12.getCategorias().addAll(Arrays.asList(categoria6));
 
 		Estado estado1 = new Estado(null, "Minas Gerais");
 		Estado estado2 = new Estado(null, "São Paulo");
@@ -101,7 +124,8 @@ public class CursomcApplication implements CommandLineRunner {
 		categoriaRepository.saveAll(Arrays.asList(categoria1, categoria2, categoria3, categoria4, categoria5,
 				categoria6, categoria7, categoria8));
 
-		produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3));
+		produtoRepository.saveAll(Arrays.asList(produto1, produto2, produto3, produto4, produto5, produto6, produto7,
+				produto8, produto9, produto10, produto11, produto12));
 
 		estadoRepository.saveAll(Arrays.asList(estado1, estado2));
 		cidadeRepository.saveAll(Arrays.asList(cidade1, cidade2, cidade3));

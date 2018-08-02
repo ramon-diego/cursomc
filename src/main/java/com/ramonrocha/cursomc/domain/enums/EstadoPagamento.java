@@ -39,5 +39,4 @@ public enum EstadoPagamento {
 		throw new IllegalArgumentException("Código inválido" + codigo);
 	}
 	
-	
 }
